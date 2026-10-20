@@ -36,7 +36,7 @@ describe('canvas keyboard navigation', () => {
     const canvas = screen.getByTestId('canvas');
     canvas.focus();
 
-    const world = canvas.querySelector('.canvas-world');
+    const world = screen.getByTestId('canvas-world');
     const transform = world?.getAttribute('style');
     const event = new KeyboardEvent('keydown', { ...keys, bubbles: true, cancelable: true });
 

@@ -1,0 +1,32 @@
+.draftPanel {
+  padding: 32px 22px;
+  overflow-y: auto;
+}
+
+.draftIllustration {
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5e8;
+  color: #92a577;
+  border-radius: 15px;
+  margin-bottom: 23px;
+}
+
+.draftPanel h2 {
+  margin: 0 0 10px;
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  color: #677356;
+}
+
+.draftPanel > p {
+  margin: 0 0 30px;
+  font-size: 11px;
+  color: #a1ab94;
+  line-height: 1.8;
+}

@@ -1,6 +1,7 @@
 import { AlertTriangle, Check, ChevronRight, MessageSquare } from 'lucide-react';
 import { Avatar } from '../../comments/avatar/avatar';
 import { WorkspaceMenu } from '../../components/workspace-menu/workspace-menu';
+import styles from './workspace-header.module.css';
 import type { WorkspaceHeaderProps } from './workspace-header.types';
 
 // Displays workspace identity, local-save status, participants, and workspace actions.
@@ -15,41 +16,41 @@ export function WorkspaceHeader({
   onReset,
 }: WorkspaceHeaderProps) {
   return (
-    <header className="app-header">
-      <button type="button" className="brand" aria-label="Formspace home" onClick={onFit}>
-        <span className="brand-mark">
+    <header className={styles.appHeader}>
+      <button type="button" className={styles.brand} aria-label="Formspace home" onClick={onFit}>
+        <span className={styles.brandMark}>
           <span />
           <span />
           <span />
         </span>
         <span>Formspace</span>
-        <span className="brand-dot">®</span>
+        <span className={styles.brandDot}>®</span>
       </button>
-      <span className="header-divider" />
-      <div className="breadcrumbs">
+      <span className={styles.headerDivider} />
+      <div className={styles.breadcrumbs}>
         <span>Workspace</span>
         <ChevronRight size={13} />
         <strong>Form explorations</strong>
       </div>
-      <span className="review-badge">
+      <span className={styles.reviewBadge}>
         <span /> In review
       </span>
-      <div className="header-actions">
+      <div className={styles.headerActions}>
         <span
-          className={`save-status${error ? ' save-error' : ''}`}
+          className={`${styles.saveStatus} ${error ? styles.saveError : ''}`}
           title={error || 'Saved in this browser only'}
         >
           {error ? <AlertTriangle size={13} /> : <Check size={13} />}
           {error ? 'Not saved' : saved ? 'Saved locally' : 'Saving…'}
         </span>
-        <section className="collaborators" aria-label="Demo participants">
-          <Avatar authorId="maya" small />
-          <Avatar authorId="sam" small />
-          <Avatar authorId="alex" small />
+        <section className={styles.collaborators} aria-label="Demo participants">
+          <Avatar authorId="maya" small className={styles.avatar} />
+          <Avatar authorId="sam" small className={styles.avatar} />
+          <Avatar authorId="alex" small className={styles.avatar} />
         </section>
         <button
           type="button"
-          className={`comments-toggle${panelOpen ? ' active' : ''}`}
+          className={`${styles.commentsToggle} ${panelOpen ? styles.active : ''}`}
           ref={commentsToggle}
           aria-label={panelOpen ? 'Hide comments' : 'Show comments'}
           aria-expanded={panelOpen}
@@ -57,7 +58,7 @@ export function WorkspaceHeader({
         >
           <MessageSquare size={16} />
           <span>Comments</span>
-          <span className="header-comment-count">{openCount}</span>
+          <span className={styles.headerCommentCount}>{openCount}</span>
         </button>
         <WorkspaceMenu onReset={onReset} />
       </div>

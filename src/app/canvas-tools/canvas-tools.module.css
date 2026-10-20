@@ -1,0 +1,58 @@
+.toolRail {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 5px;
+  background: #fff;
+  border: 1px solid #e3e7dd;
+  border-radius: 9px;
+  box-shadow: 0 3px 12px #39432a06;
+  z-index: 3;
+}
+
+.toolButton,
+.toolHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border: none;
+  background: transparent;
+  color: #929b89;
+  border-radius: 5px;
+}
+
+.toolButton:hover {
+  background: #f1f4ec;
+}
+
+.toolButton.active,
+.toolHint.active {
+  background: #ecf0e4;
+  color: #64734e;
+}
+
+.toolHint {
+  color: #aab19f;
+}
+
+.railDivider {
+  height: 1px;
+  background: #edf0e7;
+  margin: 1px 6px;
+}
+
+@media (max-width: 900px) {
+  .toolRail {
+    top: 63px;
+    left: 14px;
+  }
+  .toolButton {
+    min-width: 35px;
+    min-height: 35px;
+  }
+}

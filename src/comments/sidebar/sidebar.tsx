@@ -1,11 +1,13 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowLeft, X } from 'lucide-react';
 import { useId, useState } from 'react';
+import shared from '../../shared.module.css';
 import { CommentDraftPanel } from '../comment-draft-panel/comment-draft-panel';
 import { useComments } from '../comments-provider/use-comments';
 import { ThreadDetail } from '../thread-detail/thread-detail';
 import type { CommentFilter } from '../thread-filters/thread-filters.types';
 import { ThreadList } from '../thread-list/thread-list';
+import styles from './sidebar.module.css';
 import type { SidebarProps } from './sidebar.types';
 
 // Hosts the responsive comments dialog and switches between drafts, threads, and the list.
@@ -33,11 +35,11 @@ export function Sidebar({
     <Dialog.Root open={open} onOpenChange={onOpenChange} modal={mobile}>
       {mobile && (
         <Dialog.Portal>
-          <Dialog.Overlay className="sidebar-scrim" />
+          <Dialog.Overlay className={styles.sidebarScrim} data-testid="sidebar-scrim" />
         </Dialog.Portal>
       )}
       <Dialog.Content
-        className="sidebar"
+        className={styles.sidebar}
         data-modal={mobile}
         aria-describedby={descriptionId}
         onOpenAutoFocus={(event) => {
@@ -52,16 +54,16 @@ export function Sidebar({
         }}
         onEscapeKeyDown={(event) => {
           event.preventDefault();
-          if (document.activeElement?.closest('.editing-composer')) return;
+          if (document.activeElement?.closest('[data-editing="true"]')) return;
           onEscape();
         }}
       >
-        <div className="sidebar-header">
-          <div className="sidebar-title-group">
+        <div className={styles.sidebarHeader}>
+          <div className={styles.sidebarTitleGroup}>
             {(thread || draft) && (
               <button
                 type="button"
-                className="icon-button"
+                className={`${shared.iconButton} ${styles.iconButton}`}
                 aria-label="Back to comments"
                 onClick={onBack}
               >
@@ -71,13 +73,13 @@ export function Sidebar({
             <Dialog.Title>
               {draft ? 'New comment' : thread ? `Thread ${ordinal}` : 'Comments'}
             </Dialog.Title>
-            {!thread && !draft && <span className="count-badge">{list.length}</span>}
+            {!thread && !draft && <span className={styles.countBadge}>{list.length}</span>}
           </div>
-          <Dialog.Close className="icon-button" aria-label="Close comments">
+          <Dialog.Close className={shared.iconButton} aria-label="Close comments">
             <X size={18} />
           </Dialog.Close>
         </div>
-        <Dialog.Description id={descriptionId} className="sr-only">
+        <Dialog.Description id={descriptionId} className={shared.srOnly}>
           Review canvas conversations. Comments are saved only in this browser.
         </Dialog.Description>
         {draft ? (

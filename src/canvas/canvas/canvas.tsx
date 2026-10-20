@@ -1,5 +1,6 @@
 import { BoardItems } from '../board-items/board-items';
 import { ZoomControls } from '../zoom-controls/zoom-controls';
+import styles from './canvas.module.css';
 import type { CanvasProps } from './canvas.types';
 import { handleCanvasKeyDown } from './canvas.utils';
 import { useCanvasGestures } from './use-canvas-gestures';
@@ -11,7 +12,7 @@ export function Canvas({ controller, tool, spaceHeld, onPlace, children }: Canva
   const gestures = useCanvasGestures({ controller, tool, spaceHeld, onPlace });
   return (
     <main
-      className="canvas"
+      className={styles.canvas}
       ref={host}
       // biome-ignore lint/a11y/noNoninteractiveTabindex: The board implements keyboard pan, zoom, and comment placement and must be focusable.
       tabIndex={0}
@@ -22,15 +23,15 @@ export function Canvas({ controller, tool, spaceHeld, onPlace, children }: Canva
       onContextMenu={(event) => event.preventDefault()}
       onKeyDown={(event) => handleCanvasKeyDown(event, controller)}
     >
-      <div className="canvas-topline" aria-hidden="true">
-        <span className="canvas-section-dot" /> EXPLORATION BOARD{' '}
-        <span className="topline-divider">/</span> 4 objects
+      <div className={styles.canvasTopline} aria-hidden="true">
+        <span className={styles.canvasSectionDot} /> EXPLORATION BOARD{' '}
+        <span className={styles.toplineDivider}>/</span> 4 objects
       </div>
-      <div className="canvas-world" ref={world}>
+      <div className={styles.canvasWorld} ref={world} data-testid="canvas-world">
         <BoardItems />
         {children}
       </div>
-      <div className="canvas-bottom-hint">
+      <div className={styles.canvasBottomHint}>
         {tool === 'comment' && !spaceHeld
           ? 'Click anywhere to start a conversation'
           : 'Drag to pan · Ctrl / ⌘ + scroll to zoom'}

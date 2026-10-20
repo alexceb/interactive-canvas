@@ -1,0 +1,14 @@
+.tooltip {
+  background: #3f4c35;
+  color: #f3f6ee;
+  font-size: 10px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  box-shadow: 0 3px 8px #303a2522;
+  z-index: 50;
+  max-width: 240px;
+}
+
+.tooltip svg {
+  fill: #3f4c35;
+}

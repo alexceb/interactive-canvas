@@ -1,6 +1,8 @@
 import { CheckCheck, MessageSquarePlus } from 'lucide-react';
+import shared from '../../shared.module.css';
 import { ThreadFilters } from '../thread-filters/thread-filters';
 import { ThreadPreview } from '../thread-preview/thread-preview';
+import styles from './thread-list.module.css';
 import type { ThreadListProps } from './thread-list.types';
 
 // Presents filtered conversation previews, empty states, and the add-comment action.
@@ -11,12 +13,15 @@ export function ThreadList({ threads, filter, onFilterChange, onSelect, onAdd }:
   );
   return (
     <>
-      <div className="sidebar-intro">
+      <div className={styles.sidebarIntro}>
         <h2>A space for feedback.</h2>
         <p>Good work starts with a conversation.</p>
       </div>
       <ThreadFilters threads={threads} value={filter} onChange={onFilterChange} />
-      <section className="thread-list" aria-label={`${filter} comment threads`}>
+      <section
+        className={`${shared.scrollArea} ${styles.threadList}`}
+        aria-label={`${filter} comment threads`}
+      >
         {shown.map((thread) => (
           <ThreadPreview
             key={thread.id}
@@ -26,7 +31,7 @@ export function ThreadList({ threads, filter, onFilterChange, onSelect, onAdd }:
           />
         ))}
         {!shown.length && (
-          <div className="empty-state">
+          <div className={styles.emptyState}>
             <CheckCheck size={32} strokeWidth={1.3} />
             <h3>{filter === 'open' ? 'All caught up.' : 'Nothing here yet.'}</h3>
             <p>
@@ -37,8 +42,12 @@ export function ThreadList({ threads, filter, onFilterChange, onSelect, onAdd }:
           </div>
         )}
       </section>
-      <div className="sidebar-footer">
-        <button type="button" className="secondary-button" onClick={onAdd}>
+      <div className={styles.sidebarFooter}>
+        <button
+          type="button"
+          className={`${shared.secondaryButton} ${styles.secondaryButton}`}
+          onClick={onAdd}
+        >
           <MessageSquarePlus size={16} /> Add a comment <kbd>C</kbd>
         </button>
         <p>Click anywhere on the canvas to leave a thought.</p>

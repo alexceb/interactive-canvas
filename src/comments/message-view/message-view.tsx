@@ -1,9 +1,11 @@
 import { Pencil } from 'lucide-react';
+import shared from '../../shared.module.css';
 import { Avatar } from '../avatar/avatar';
 import { CommentTime } from '../comment-time/comment-time';
 import { AUTHORS, CURRENT_USER } from '../comments.constants';
 import { useCommentActions } from '../comments-provider/use-comments';
 import { Composer } from '../composer/composer';
+import styles from './message-view.module.css';
 import type { MessageViewProps } from './message-view.types';
 import { useMessageEdit } from './use-message-edit';
 
@@ -13,20 +15,20 @@ export function MessageView({ message, threadId }: MessageViewProps) {
   const { editing, setEditing, editButton } = useMessageEdit();
   const own = message.authorId === CURRENT_USER;
   return (
-    <article className="message" aria-label={`Comment by ${AUTHORS[message.authorId].name}`}>
-      <div className="message-heading">
+    <article className={styles.message} aria-label={`Comment by ${AUTHORS[message.authorId].name}`}>
+      <div className={styles.messageHeading}>
         <Avatar authorId={message.authorId} small />
         <div>
           <strong>
             {AUTHORS[message.authorId].name}
-            {own && <span className="you-label">you</span>}
+            {own && <span className={styles.youLabel}>you</span>}
           </strong>
           <CommentTime createdAt={message.createdAt} editedAt={message.editedAt} />
         </div>
         {own && !editing && (
           <button
             type="button"
-            className="icon-button edit-button"
+            className={`${shared.iconButton} ${styles.editButton}`}
             aria-label="Edit comment"
             ref={editButton}
             onClick={() => setEditing(true)}
@@ -47,7 +49,7 @@ export function MessageView({ message, threadId }: MessageViewProps) {
           }}
         />
       ) : (
-        <p className="message-text">{message.text}</p>
+        <p className={styles.messageText}>{message.text}</p>
       )}
     </article>
   );

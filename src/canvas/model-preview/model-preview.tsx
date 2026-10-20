@@ -1,5 +1,6 @@
 import { Component, Suspense } from 'react';
 import { ModelFallback } from '../model-fallback/model-fallback';
+import styles from './model-preview.module.css';
 import type { ModelPreviewProps, ModelPreviewState } from './model-preview.types';
 import { createModel, InitialModel } from './model-preview.utils';
 
@@ -16,7 +17,7 @@ export class ModelPreview extends Component<ModelPreviewProps, ModelPreviewState
   render() {
     if (this.state.failed)
       return (
-        <div className="model-render" data-unavailable="true">
+        <div className={styles.modelRender} data-unavailable="true">
           <ModelFallback
             message="3D preview could not load."
             onRetry={() => this.setState({ failed: false, Model: createModel() })}
@@ -25,7 +26,7 @@ export class ModelPreview extends Component<ModelPreviewProps, ModelPreviewState
       );
     const { Model } = this.state;
     return (
-      <Suspense fallback={<div className="model-render" />}>
+      <Suspense fallback={<div className={styles.modelRender} />}>
         <Model shape={this.props.shape} />
       </Suspense>
     );

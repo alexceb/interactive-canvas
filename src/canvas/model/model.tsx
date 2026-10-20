@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { ModelFallback } from '../model-fallback/model-fallback';
+import styles from '../model-preview/model-preview.module.css';
 import type { ModelProps } from './model.types';
 import { createModelScene } from './model-scene';
 
@@ -11,7 +12,7 @@ export function Model({ shape }: ModelProps) {
     if (element) return createModelScene(element, shape);
   }, [shape]);
   return (
-    <div className="model-render" ref={host} role="img" aria-label={`Static 3D ${shape}`}>
+    <div className={styles.modelRender} ref={host} role="img" aria-label={`Static 3D ${shape}`}>
       <ModelFallback
         message="3D preview unavailable"
         detail="WebGL is required to display this model."

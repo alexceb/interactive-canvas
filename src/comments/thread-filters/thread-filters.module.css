@@ -1,0 +1,46 @@
+.filterTabs {
+  min-width: 0;
+  border: 0;
+  display: flex;
+  margin: 0 21px 16px;
+  padding: 3px;
+  border-radius: 6px;
+  background: #f4f5f1;
+  gap: 2px;
+}
+
+.filterTabs button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 7px 4px;
+  border-radius: 4px;
+  color: #939b89;
+  font-size: 10px;
+}
+
+.filterTabs button[aria-pressed="true"] {
+  background: white;
+  color: #566447;
+  box-shadow: 0 1px 4px #3d47280d;
+}
+
+.filterTabs button:hover {
+  color: #546545;
+}
+
+.filterTabs button span {
+  font-size: 8px;
+  color: #a3ab99;
+}
+
+@media (max-width: 900px) {
+  .filterTabs button {
+    font-size: 12px;
+    min-height: 37px;
+  }
+}

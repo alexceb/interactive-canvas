@@ -1,0 +1,51 @@
+.zoomControls {
+  position: absolute;
+  right: 22px;
+  bottom: 19px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid #e1e5d9;
+  border-radius: 7px;
+  background: #fff;
+  padding: 4px;
+  box-shadow: 0 2px 7px #39432a04;
+}
+
+.zoomControls .iconButton {
+  width: 28px;
+  height: 27px;
+}
+
+.zoomValue {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  width: 43px;
+  border: none;
+  background: transparent;
+  color: #6e7861;
+  padding: 5px 0;
+  border-radius: 3px;
+}
+
+.zoomValue:hover {
+  background: #f2f5ed;
+}
+
+.controlDivider {
+  height: 16px;
+  width: 1px;
+  background: #e7ebe0;
+  margin: 0 4px;
+}
+
+@media (max-width: 600px) {
+  .zoomControls {
+    right: 14px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+  .zoomControls .iconButton {
+    min-width: 32px;
+    min-height: 32px;
+  }
+}

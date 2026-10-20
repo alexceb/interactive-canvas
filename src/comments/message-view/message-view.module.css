@@ -1,0 +1,52 @@
+.message {
+  padding: 22px 0 6px;
+}
+
+.messageHeading {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.messageHeading > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.messageHeading strong {
+  font-weight: 600;
+  font-size: 12px;
+  color: #59634e;
+}
+
+.messageHeading time {
+  color: #89937d;
+  font-size: 10px;
+}
+
+.youLabel {
+  font-weight: 400;
+  color: #a3ab97;
+  margin-left: 6px;
+  font-size: 9px;
+}
+
+.editButton {
+  margin-left: auto;
+  opacity: 0.5;
+}
+
+.message:hover .editButton,
+.editButton:focus-visible {
+  opacity: 1;
+}
+
+.messageText {
+  margin: 13px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #69765d;
+  font-size: 13px;
+  line-height: 1.85;
+}

@@ -1,0 +1,18 @@
+.modalIcon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5e8;
+  color: #94a779;
+  border-radius: 12px;
+  margin-bottom: 23px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+  gap: 8px;
+}

@@ -1,6 +1,8 @@
 import { ArrowUp } from 'lucide-react';
+import shared from '../../shared.module.css';
 import { Avatar } from '../avatar/avatar';
 import { CURRENT_USER, MAX_MESSAGE_LENGTH } from '../comments.constants';
+import styles from './composer.module.css';
 import type { ComposerProps } from './composer.types';
 import { useComposer } from './use-composer';
 
@@ -26,7 +28,8 @@ export function Composer({
   });
   return (
     <form
-      className={`composer${editing ? ' editing-composer' : ''}`}
+      className={`${styles.composer} ${editing ? styles.editingComposer : ''}`}
+      data-editing={editing}
       onSubmit={(event) => {
         event.preventDefault();
         submit();
@@ -41,14 +44,14 @@ export function Composer({
       }}
     >
       {!editing && (
-        <div className="composer-author">
+        <div className={styles.composerAuthor}>
           <Avatar authorId={CURRENT_USER} small />
           <span>
             Commenting as <strong>Alex</strong>
           </span>
         </div>
       )}
-      <div className="composer-input-wrap">
+      <div className={styles.composerInputWrap}>
         <textarea
           ref={input}
           aria-label={label}
@@ -65,20 +68,22 @@ export function Composer({
             }
           }}
         />
-        <div className="composer-footer">
+        <div className={styles.composerFooter}>
           <span>
             {text.length > 4500
               ? `${text.length} / ${MAX_MESSAGE_LENGTH}`
               : '⌘ / Ctrl + Enter to send'}
           </span>
-          <div className="composer-actions">
+          <div className={styles.composerActions}>
             {onCancel && (
-              <button className="text-button" type="button" onClick={onCancel}>
+              <button className={shared.textButton} type="button" onClick={onCancel}>
                 Cancel
               </button>
             )}
             <button
-              className={editing ? 'primary-button small-button' : 'send-button'}
+              className={
+                editing ? `${shared.primaryButton} ${shared.smallButton}` : styles.sendButton
+              }
               type="submit"
               disabled={!valid}
               aria-label={editing ? 'Save edit' : 'Send comment'}

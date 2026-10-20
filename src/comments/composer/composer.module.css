@@ -1,0 +1,91 @@
+.composerAuthor {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  color: #89967a;
+  margin-bottom: 10px;
+}
+
+.composerAuthor strong {
+  font-weight: 500;
+  color: #7d896e;
+}
+
+.composerInputWrap {
+  border: 1px solid #e1e7d8;
+  border-radius: 7px;
+  background: #fdfefb;
+}
+
+.composerInputWrap:focus-within {
+  border-color: #a6b88c;
+  box-shadow: 0 0 0 3px #a6b88c12;
+}
+
+.composer textarea {
+  display: block;
+  width: 100%;
+  resize: vertical;
+  min-height: 76px;
+  max-height: 220px;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  font-size: 13px;
+  color: #5f6a52;
+  line-height: 1.7;
+}
+
+.composer textarea::placeholder {
+  color: #adb69e;
+}
+
+.composerFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 8px 8px 12px;
+  font-size: 8px;
+  color: #aab59c;
+  gap: 5px;
+}
+
+.composerActions {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.sendButton {
+  width: 27px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #81926b;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.sendButton:hover:not(:disabled) {
+  background: #657d4c;
+}
+
+.editingComposer {
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .composer textarea {
+    font-size: 16px;
+  }
+  .sendButton {
+    width: 34px;
+    height: 34px;
+  }
+  .composerFooter {
+    font-size: 9px;
+  }
+}

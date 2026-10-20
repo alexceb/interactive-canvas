@@ -3,6 +3,7 @@ import { Avatar } from '../avatar/avatar';
 import { CommentTime } from '../comment-time/comment-time';
 import { AUTHORS } from '../comments.constants';
 import { getReplyLabel } from '../thread.utils';
+import styles from './thread-preview.module.css';
 import type { ThreadPreviewProps } from './thread-preview.types';
 
 // Summarizes a pinned conversation, its participants, reply count, and last activity.
@@ -13,25 +14,25 @@ export function ThreadPreview({ thread, ordinal, onClick }: ThreadPreviewProps) 
   return (
     <button
       type="button"
-      className="thread-preview"
+      className={styles.threadPreview}
       onClick={onClick}
       data-testid={`thread-${thread.id}`}
     >
-      <div className="thread-preview-heading">
+      <div className={styles.threadPreviewHeading}>
         <Avatar authorId={root.authorId} small />
         <strong>{AUTHORS[root.authorId].name}</strong>
         <CommentTime createdAt={root.createdAt} />
       </div>
-      <p className="thread-excerpt">{root.text}</p>
-      <div className="thread-preview-footer">
-        <span className={`thread-number${thread.resolved ? ' is-resolved' : ''}`}>
+      <p className={styles.threadExcerpt}>{root.text}</p>
+      <div className={styles.threadPreviewFooter}>
+        <span className={`${styles.threadNumber} ${thread.resolved ? styles.isResolved : ''}`}>
           {thread.resolved ? <Check size={11} /> : <MessageCircle size={11} />} {ordinal}
         </span>
         {thread.messages.length > 1 ? (
           <>
-            <span className="mini-avatars">
+            <span className={styles.miniAvatars}>
               {authors.map((id) => (
-                <Avatar key={id} authorId={id} small />
+                <Avatar key={id} authorId={id} small className={styles.avatar} />
               ))}
             </span>
             <span>{getReplyLabel(thread.messages.length - 1)}</span>
@@ -39,7 +40,7 @@ export function ThreadPreview({ thread, ordinal, onClick }: ThreadPreviewProps) 
         ) : (
           <span>No replies yet</span>
         )}
-        <span className="last-activity">
+        <span className={styles.lastActivity}>
           <CommentTime createdAt={last.createdAt} />
         </span>
         <ChevronRight size={14} />

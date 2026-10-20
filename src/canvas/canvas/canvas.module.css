@@ -1,0 +1,90 @@
+.canvas {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  background-color: #f6f7f4;
+  background-image: radial-gradient(#d6dbd1 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+  outline-offset: -3px;
+}
+
+.canvas:focus-visible {
+  outline: 2px solid #b0bc99;
+}
+
+.canvas[data-tool="comment"] {
+  cursor: crosshair;
+}
+
+.canvas[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+.canvasWorld {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.canvasTopline {
+  display: flex;
+  position: absolute;
+  top: 22px;
+  left: 25px;
+  gap: 8px;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 1.1px;
+  color: #8f9787;
+  pointer-events: none;
+}
+
+.canvasSectionDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a0ac8a;
+}
+
+.toplineDivider {
+  padding: 0 4px;
+  color: #c5cbbd;
+}
+
+.canvasBottomHint {
+  position: absolute;
+  bottom: 25px;
+  left: 26px;
+  font-size: 10px;
+  color: #969e8e;
+  pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+  .canvasBottomHint {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .canvasBottomHint {
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .canvasTopline {
+    font-size: 8px;
+    left: 17px;
+    top: 19px;
+  }
+  .canvasBottomHint {
+    display: none;
+  }
+}

@@ -2,9 +2,11 @@ import { AlertTriangle } from 'lucide-react';
 import { Canvas } from '../../canvas/canvas/canvas';
 import { CommentPins } from '../../comments/comment-pins/comment-pins';
 import { Sidebar } from '../../comments/sidebar/sidebar';
+import shared from '../../shared.module.css';
 import { CanvasTools } from '../canvas-tools/canvas-tools';
 import { WorkspaceHeader } from '../workspace-header/workspace-header';
 import { useWorkspace } from './use-workspace';
+import styles from './workspace.module.css';
 
 // Connects workspace navigation, anchored comments, and responsive review panels.
 export function Workspace() {
@@ -35,7 +37,7 @@ export function Workspace() {
     createThread,
   } = useWorkspace();
   return (
-    <div className="app-shell">
+    <div className={styles.appShell}>
       <WorkspaceHeader
         panelOpen={panelOpen}
         openCount={openCount}
@@ -47,12 +49,12 @@ export function Workspace() {
         onReset={resetWorkspace}
       />
       {error && (
-        <div className="storage-warning" role="alert">
+        <div className={styles.storageWarning} role="alert">
           <AlertTriangle size={16} />
           <span>{error}</span>
         </div>
       )}
-      <div className="workspace" data-panel={panelOpen}>
+      <div className={styles.workspace} data-panel={panelOpen}>
         <Canvas controller={controller} tool={tool} spaceHeld={spaceHeld} onPlace={place}>
           <CommentPins selectedId={selectedId} draft={draft?.anchor ?? null} onSelect={select} />
         </Canvas>
@@ -77,7 +79,7 @@ export function Workspace() {
           onCreate={createThread}
         />
       </div>
-      <div className="screen-reader-announcement sr-only" aria-live="polite">
+      <div className={shared.srOnly} aria-live="polite">
         {tool === 'comment'
           ? 'Comment tool active. Click the canvas, or press Enter on the focused canvas to comment at its center.'
           : ''}

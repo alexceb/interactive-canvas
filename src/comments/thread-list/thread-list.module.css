@@ -1,0 +1,82 @@
+.sidebarIntro {
+  padding: 26px 22px 19px;
+}
+
+.sidebarIntro h2 {
+  margin: 0 0 8px;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.6px;
+  color: #555e48;
+}
+
+.sidebarIntro p {
+  margin: 0;
+  font-size: 11px;
+  color: #818a75;
+}
+
+.threadList {
+  padding: 0 10px;
+}
+
+.sidebarFooter {
+  padding: 20px 22px 18px;
+  border-top: 1px solid #edf0e6;
+}
+
+.sidebarFooter p {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 8px;
+  color: #a4ad99;
+}
+
+.sidebarFooter .secondaryButton {
+  width: 100%;
+  font-size: 10px;
+}
+
+.sidebarFooter kbd {
+  margin-left: auto;
+}
+
+.emptyState {
+  padding: 50px 15px;
+  text-align: center;
+  color: #a9b19c;
+}
+
+.emptyState svg {
+  margin: 0 auto 16px;
+  color: #a5b68c;
+}
+
+.emptyState h3 {
+  font-weight: 500;
+  color: #859475;
+  font-size: 13px;
+  margin: 0 0 6px;
+}
+
+.emptyState p {
+  font-size: 10px;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .sidebarFooter .secondaryButton {
+    min-height: 42px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebarIntro {
+    padding-top: 22px;
+  }
+  .sidebarIntro h2 {
+    font-size: 25px;
+  }
+}

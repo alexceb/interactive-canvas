@@ -1,0 +1,67 @@
+.threadStatus {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f2eb;
+}
+
+.statusLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #9a9e8d;
+  font-size: 10px;
+}
+
+.statusLabel > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #b9ad7e;
+}
+
+.statusResolved {
+  color: #8a9c72;
+}
+
+.statusResolved > span {
+  background: #9bae7f;
+}
+
+.messages {
+  padding: 5px 22px 22px;
+}
+
+.repliesDivider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+  color: #aab19e;
+  font-size: 9px;
+}
+
+.repliesDivider span {
+  flex: 1;
+  height: 1px;
+  background: #edf0e7;
+}
+
+.replyArea {
+  padding: 18px 20px 20px;
+  border-top: 1px solid #e9eddf;
+}
+
+.resolvedNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px;
+  margin-top: 25px;
+  background: #f5f8ef;
+  color: #8da475;
+  font-size: 9px;
+  line-height: 1.8;
+  border-radius: 6px;
+}

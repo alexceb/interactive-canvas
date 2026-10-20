@@ -1,0 +1,35 @@
+.modalClose {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+}
+
+.shortcutList {
+  margin: 22px 0 0;
+}
+
+.shortcutList > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #edf1e5;
+  font-size: 11px;
+}
+
+.shortcutList dt {
+  color: #8b987d;
+}
+
+.shortcutList dd {
+  color: #667b54;
+  margin: 0;
+  text-align: right;
+  font-size: 10px;
+}
+
+.helpCard .helpNote {
+  margin-top: 20px;
+  font-size: 10px;
+}

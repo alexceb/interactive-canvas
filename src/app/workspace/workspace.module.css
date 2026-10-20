@@ -1,0 +1,41 @@
+.appShell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  min-height: 360px;
+  overflow: hidden;
+}
+
+.workspace {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  display: flex;
+}
+
+.workspace[data-panel="true"] {
+  padding-right: var(--sidebar-width);
+}
+
+.storageWarning {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  padding: 9px 20px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #99783e;
+  background: #fff8e9;
+  border-bottom: 1px solid #eee1c5;
+}
+
+.storageWarning svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .workspace[data-panel="true"] {
+    padding-right: 0;
+  }
+}

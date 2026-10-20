@@ -1,0 +1,72 @@
+.conceptCard {
+  background: #f4f0e7;
+  padding: 26px;
+}
+
+.conceptCard .itemCaption {
+  color: #8e8a76;
+}
+
+.conceptTitle {
+  margin: 69px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 40px;
+  line-height: 1.13;
+  letter-spacing: -1.5px;
+  color: #555c44;
+}
+
+.conceptTitle em {
+  font-weight: 400;
+}
+
+.conceptBottom {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #8d917e;
+  font-size: 9px;
+  line-height: 1.65;
+}
+
+.paletteCard {
+  background: #fff;
+  padding: 24px;
+}
+
+.paletteCard .itemCaption {
+  color: #8e9487;
+}
+
+.swatches {
+  display: flex;
+  height: 102px;
+  margin: 39px 0 21px;
+  gap: 8px;
+}
+
+.swatches > div {
+  flex: 1;
+  border-radius: 40px 40px 4px 4px;
+}
+
+.paletteNotes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.paletteNotes strong {
+  font-size: 14px;
+  font-weight: 500;
+  color: #606956;
+}
+
+.paletteNotes span {
+  font-size: 9px;
+  color: #a1a795;
+}

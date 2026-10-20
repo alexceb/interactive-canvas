@@ -1,0 +1,55 @@
+.pinsLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.commentPin {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -100%) scale(var(--inverse-zoom, 1));
+  transform-origin: center bottom;
+  border: 2px solid white;
+  border-radius: 50% 50% 50% 3px;
+  background: #758360;
+  color: #fff;
+  box-shadow: 0 2px 6px #3e4e3130;
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: auto;
+}
+
+.commentPin:hover {
+  background: #5c6b49;
+  box-shadow: 0 0 0 4px #8a9b7030;
+}
+
+.commentPin.selected {
+  background: #5d704b;
+  box-shadow: 0 0 0 5px #8a9b7035;
+  z-index: 2;
+}
+
+.commentPin.resolved {
+  background: #edf0e8;
+  border-color: white;
+  color: #879574;
+}
+
+.draftPin {
+  background: #7b6999;
+  pointer-events: none;
+  box-shadow: 0 0 0 5px #9c8fb635;
+}
+
+@media (max-width: 600px) {
+  .commentPin {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+}
