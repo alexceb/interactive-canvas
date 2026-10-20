@@ -3,7 +3,7 @@ import { ThreadFilters } from '../thread-filters/thread-filters';
 import { ThreadPreview } from '../thread-preview/thread-preview';
 import type { ThreadListProps } from './thread-list.types';
 
-/** Presents filtered conversation previews, empty states, and the add-comment action. */
+// Presents filtered conversation previews, empty states, and the add-comment action.
 export function ThreadList({ threads, filter, onFilterChange, onSelect, onAdd }: ThreadListProps) {
   const ordinals = new Map(threads.map((thread, index) => [thread.id, index + 1]));
   const shown = threads.filter(

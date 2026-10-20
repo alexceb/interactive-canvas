@@ -4,7 +4,7 @@ import { TooltipButton } from '../../components/tooltip-button/tooltip-button';
 import { CANVAS_TOOLS } from './canvas-tools.constants';
 import type { CanvasToolsProps } from './canvas-tools.types';
 
-/** Selects navigation or comment placement and shows the temporary Space-to-pan hint. */
+// Selects navigation or comment placement and shows the temporary Space-to-pan hint.
 export function CanvasTools({ tool, spaceHeld, onNavigate, onComment }: CanvasToolsProps) {
   return (
     <div className="tool-rail" role="toolbar" aria-label="Canvas tools">

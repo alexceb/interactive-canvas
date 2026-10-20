@@ -6,21 +6,45 @@ import { CanvasTools } from '../canvas-tools/canvas-tools';
 import { WorkspaceHeader } from '../workspace-header/workspace-header';
 import { useWorkspace } from './use-workspace';
 
-/** Connects workspace navigation, anchored comments, and responsive review panels. */
+// Connects workspace navigation, anchored comments, and responsive review panels.
 export function Workspace() {
-  const workspace = useWorkspace();
-  const { controller, mobile, tool, spaceHeld, panelOpen, selectedId, draft, error } = workspace;
+  const {
+    controller,
+    mobile,
+    tool,
+    spaceHeld,
+    panelOpen,
+    selectedId,
+    draft,
+    error,
+    openCount,
+    saved,
+    commentsToggle,
+    togglePanel,
+    resetWorkspace,
+    place,
+    navigate,
+    startComment,
+    setPanelOpen,
+    changeDraft,
+    closeAutoFocus,
+    selectFromList,
+    select,
+    back,
+    handleEscape,
+    createThread,
+  } = useWorkspace();
   return (
     <div className="app-shell">
       <WorkspaceHeader
         panelOpen={panelOpen}
-        openCount={workspace.openCount}
+        openCount={openCount}
         error={error}
-        saved={workspace.saved}
-        commentsToggle={workspace.commentsToggle}
+        saved={saved}
+        commentsToggle={commentsToggle}
         onFit={() => controller.fit()}
-        onToggle={workspace.togglePanel}
-        onReset={workspace.resetWorkspace}
+        onToggle={togglePanel}
+        onReset={resetWorkspace}
       />
       {error && (
         <div className="storage-warning" role="alert">
@@ -29,32 +53,28 @@ export function Workspace() {
         </div>
       )}
       <div className="workspace" data-panel={panelOpen}>
-        <Canvas controller={controller} tool={tool} spaceHeld={spaceHeld} onPlace={workspace.place}>
-          <CommentPins
-            selectedId={selectedId}
-            draft={draft?.anchor ?? null}
-            onSelect={workspace.select}
-          />
+        <Canvas controller={controller} tool={tool} spaceHeld={spaceHeld} onPlace={place}>
+          <CommentPins selectedId={selectedId} draft={draft?.anchor ?? null} onSelect={select} />
         </Canvas>
         <CanvasTools
           tool={tool}
           spaceHeld={spaceHeld}
-          onNavigate={workspace.navigate}
-          onComment={workspace.startComment}
+          onNavigate={navigate}
+          onComment={startComment}
         />
         <Sidebar
           open={panelOpen}
           mobile={mobile}
           selectedId={selectedId}
           draft={draft}
-          onOpenChange={workspace.setPanelOpen}
-          onDraftChange={workspace.changeDraft}
-          onCloseAutoFocus={workspace.closeAutoFocus}
-          onSelect={workspace.selectFromList}
-          onBack={workspace.back}
-          onAdd={workspace.startComment}
-          onEscape={workspace.handleEscape}
-          onCreate={workspace.createThread}
+          onOpenChange={setPanelOpen}
+          onDraftChange={changeDraft}
+          onCloseAutoFocus={closeAutoFocus}
+          onSelect={selectFromList}
+          onBack={back}
+          onAdd={startComment}
+          onEscape={handleEscape}
+          onCreate={createThread}
         />
       </div>
       <div className="screen-reader-announcement sr-only" aria-live="polite">

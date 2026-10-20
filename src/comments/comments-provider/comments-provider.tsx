@@ -10,7 +10,7 @@ import { STORAGE_UNAVAILABLE_MESSAGE } from './comments-provider.constants';
 import type { CommentActions, CommentsProviderProps } from './comments-provider.types';
 import { loadInitialWorkspace } from './comments-provider.utils';
 
-/** Shares comment data, domain actions, and local persistence status with the workspace. */
+// Owns saved conversations, comment actions, and browser persistence status.
 export function CommentsProvider({ children }: CommentsProviderProps) {
   const [initial] = useState(loadInitialWorkspace);
   const [data, dispatch] = useReducer(workspaceReducer, initial.data);
@@ -18,7 +18,10 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
   const [error, setError] = useState(initial.error);
   const [savedData, setSavedData] = useState<Workspace | null>(null);
   useEffect(() => {
+    // Preserve unreadable saved data until an explicit reset enables writes again.
     if (blocked) return;
+
+    // Writes the latest committed workspace and updates its save status.
     const persist = () => {
       try {
         const failure = saveWorkspace(window.localStorage, data);
@@ -28,7 +31,8 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
         setError(STORAGE_UNAVAILABLE_MESSAGE);
       }
     };
-    // Coalesce rapid actions, and flush the latest committed state before reload/navigation.
+
+    // Coalesce rapid actions and flush the latest committed state before the page is left.
     const timer = window.setTimeout(persist, 80);
     window.addEventListener('pagehide', persist);
     return () => {
@@ -36,6 +40,8 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
       window.removeEventListener('pagehide', persist);
     };
   }, [data, blocked]);
+
+  // Creates a thread and returns its identifier for immediate selection.
   const addThread = useCallback((anchor: Point, text: string) => {
     const id = crypto.randomUUID();
     dispatch({
@@ -58,6 +64,7 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
           editedAt: new Date().toISOString(),
         }),
       resolve: (threadId, resolved) => dispatch({ type: 'thread/resolve', threadId, resolved }),
+      // Restores demo data and enables saving after recovery.
       reset: () => {
         setBlocked(false);
         setError(null);

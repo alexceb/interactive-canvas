@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import type { DialogStateProps } from '../dialog.types';
 import { HELP_SHORTCUTS } from './help-dialog.constants';
 
-/** Explains board gestures and keyboard controls in a dismissible help dialog. */
+// Explains board gestures and keyboard controls in a dismissible help dialog.
 export function HelpDialog({ open, onOpenChange }: DialogStateProps) {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>

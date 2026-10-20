@@ -1,4 +1,5 @@
 import type { HelpShortcut } from './help-dialog.types';
+
 export const HELP_SHORTCUTS = [
   { label: 'Pan the canvas', content: 'Drag / scroll' },
   { label: 'Zoom at pointer', content: 'Ctrl / ⌘ + scroll' },

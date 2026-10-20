@@ -6,7 +6,6 @@ import { Harness } from './harness/harness';
 
 describe('persistence integration', () => {
   it('flushes a recent action on pagehide before the debounce expires', async () => {
-    // Reloading before the save timer fires must not discard a submitted comment.
     render(
       <CommentsProvider>
         <Harness />
@@ -20,7 +19,6 @@ describe('persistence integration', () => {
     await waitFor(() => expect(screen.getByText('Saved')).toBeInTheDocument());
   });
   it('does not overwrite corrupt storage until an explicit reset', async () => {
-    // Exploring the recovery demo must not replace existing data without an explicit reset.
     localStorage.setItem(STORAGE_KEY, 'broken');
     render(
       <CommentsProvider>

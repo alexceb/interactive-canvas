@@ -1,6 +1,6 @@
 import { useCommentActions, useComments, usePersistence } from '../use-comments';
 
-/** Exposes provider actions and save state for persistence integration tests. */
+// Exposes provider actions and save state for persistence integration tests.
 export function Harness() {
   const { addThread, reset } = useCommentActions();
   const { threads } = useComments();

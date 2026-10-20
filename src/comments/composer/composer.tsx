@@ -4,7 +4,7 @@ import { CURRENT_USER, MAX_MESSAGE_LENGTH } from '../comments.constants';
 import type { ComposerProps } from './composer.types';
 import { useComposer } from './use-composer';
 
-/** Composes a new comment, reply, or edit with multiline text and keyboard submission. */
+// Composes a new comment, reply, or edit with multiline text and keyboard submission.
 export function Composer({
   onSubmit,
   onCancel,

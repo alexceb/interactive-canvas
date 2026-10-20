@@ -2,7 +2,7 @@ import { MessageSquarePlus } from 'lucide-react';
 import { Composer } from '../composer/composer';
 import type { CommentDraftPanelProps } from './comment-draft-panel.types';
 
-/** Edits the temporary text attached to a new board anchor before a thread is submitted. */
+// Edits the temporary text attached to a new board anchor before a thread is submitted.
 export function CommentDraftPanel({ draft, onChange, onCreate, onCancel }: CommentDraftPanelProps) {
   return (
     <div className="draft-panel">

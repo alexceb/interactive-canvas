@@ -8,7 +8,7 @@ import type { CommentFilter } from '../thread-filters/thread-filters.types';
 import { ThreadList } from '../thread-list/thread-list';
 import type { SidebarProps } from './sidebar.types';
 
-/** Hosts the responsive comments dialog and switches between drafts, threads, and the list. */
+// Hosts the responsive comments dialog and switches between drafts, threads, and the list.
 export function Sidebar({
   open,
   mobile,

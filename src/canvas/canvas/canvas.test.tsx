@@ -24,7 +24,6 @@ describe('canvas gesture cancellation', () => {
   it.each(['lostPointerCapture', 'pointerCancel'] as const)(
     'stops an interrupted drag on %s and allows a fresh gesture',
     (event) => {
-      // Interrupted input must not leave ghost dragging or accidentally place a comment.
       const { canvas, controller, onPlace } = setup();
       const initial = { ...controller.view };
       fireEvent.pointerDown(canvas, { pointerId: 1, button: 0, clientX: 100, clientY: 100 });
@@ -43,7 +42,6 @@ describe('canvas gesture cancellation', () => {
   );
 
   it('keeps the remaining pointer usable after a pinch is interrupted', () => {
-    // Losing one touch must not corrupt the remaining touch or turn a pinch into a comment.
     const { canvas, controller, onPlace } = setup();
     fireEvent.pointerDown(canvas, { pointerId: 1, button: 0, clientX: 100, clientY: 100 });
     fireEvent.pointerDown(canvas, { pointerId: 2, button: 0, clientX: 200, clientY: 100 });
@@ -58,7 +56,6 @@ describe('canvas gesture cancellation', () => {
   });
 
   it('ignores capture loss after a normal pointer release', () => {
-    // Browsers release capture after pointerup; that notification must not duplicate placement.
     const { canvas, onPlace } = setup();
     fireEvent.pointerDown(canvas, { pointerId: 1, button: 0, clientX: 30, clientY: 40 });
     fireEvent.pointerUp(canvas, { pointerId: 1, button: 0, clientX: 30, clientY: 40 });

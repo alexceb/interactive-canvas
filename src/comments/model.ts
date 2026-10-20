@@ -1,10 +1,13 @@
-import { CURRENT_USER } from "./comments.constants";
-import type { Action, Workspace } from "./comments.types";
-import { isValidMessageText } from "./message.utils";
+import { CURRENT_USER } from './comments.constants';
+import type { Action, Workspace } from './comments.types';
+import { isValidMessageText } from './message.utils';
 
+// Applies validated comment actions immutably and enforces local author ownership.
 export function workspaceReducer(state: Workspace, action: Action): Workspace {
-  if (action.type === "workspace/reset") return action.workspace;
-  if (action.type === "thread/add") {
+  if (action.type === 'workspace/reset') return action.workspace;
+
+  // Validate new threads here so callers cannot bypass the composer constraints.
+  if (action.type === 'thread/add') {
     const thread = action.thread;
     if (
       !thread.id.trim() ||
@@ -21,11 +24,11 @@ export function workspaceReducer(state: Workspace, action: Action): Workspace {
   const thread = state.threads[action.threadId];
   if (!thread) return state;
   let next = thread;
-  if (action.type === "thread/resolve") {
+  if (action.type === 'thread/resolve') {
     if (thread.resolved === action.resolved) return state;
     next = { ...thread, resolved: action.resolved };
   }
-  if (action.type === "message/reply") {
+  if (action.type === 'message/reply') {
     if (
       !isValidMessageText(action.message.text) ||
       action.message.authorId !== CURRENT_USER ||
@@ -34,7 +37,9 @@ export function workspaceReducer(state: Workspace, action: Action): Workspace {
       return state;
     next = { ...thread, messages: [...thread.messages, action.message] };
   }
-  if (action.type === "message/edit") {
+
+  // Check authorship and content before replacing text while retaining message history.
+  if (action.type === 'message/edit') {
     const target = thread.messages.find((message) => message.id === action.messageId);
     if (
       !target ||
@@ -46,7 +51,9 @@ export function workspaceReducer(state: Workspace, action: Action): Workspace {
     next = {
       ...thread,
       messages: thread.messages.map((message) =>
-        message.id === action.messageId ? { ...message, text: action.text.trim(), editedAt: action.editedAt } : message,
+        message.id === action.messageId
+          ? { ...message, text: action.text.trim(), editedAt: action.editedAt }
+          : message,
       ),
     };
   }

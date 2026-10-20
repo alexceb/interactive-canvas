@@ -2,7 +2,7 @@ import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import { RotateCcw } from 'lucide-react';
 import type { ResetDemoDialogProps } from './reset-demo-dialog.types';
 
-/** Confirms replacing locally saved conversations with the original demo data. */
+// Confirms replacing locally saved conversations with the original demo data.
 export function ResetDemoDialog({ open, onOpenChange, onReset }: ResetDemoDialogProps) {
   return (
     <AlertDialog.Root open={open} onOpenChange={onOpenChange}>

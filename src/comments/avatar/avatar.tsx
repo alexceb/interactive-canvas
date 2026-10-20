@@ -1,7 +1,7 @@
 import { AUTHORS } from '../comments.constants';
 import type { AvatarProps } from './avatar.types';
 
-/** Displays the initials and color assigned to a demo participant. */
+// Displays the initials and color assigned to a demo participant.
 export function Avatar({ authorId, small = false }: AvatarProps) {
   const author = AUTHORS[authorId];
   return (

@@ -4,7 +4,7 @@ import { AUTHORS } from '../comments.constants';
 import { useComments } from '../comments-provider/use-comments';
 import type { CommentPinsProps } from './comment-pins.types';
 
-/** Renders anchored, selectable thread pins and the current draft marker. */
+// Renders anchored, selectable thread pins and the current draft marker.
 export const CommentPins = memo(function CommentPins({
   selectedId,
   draft,

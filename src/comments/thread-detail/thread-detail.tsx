@@ -6,7 +6,7 @@ import { getReplyLabel } from '../thread.utils';
 import type { ThreadDetailProps } from './thread-detail.types';
 import { useThreadScroll } from './use-thread-scroll';
 
-/** Displays a conversation with its replies, resolution controls, and reply composer. */
+// Displays a conversation with its replies, resolution controls, and reply composer.
 export function ThreadDetail({ thread }: ThreadDetailProps) {
   const { reply, resolve } = useCommentActions();
   const scrollArea = useThreadScroll(thread.messages.at(-1)?.id);

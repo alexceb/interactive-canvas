@@ -5,7 +5,6 @@ import { Composer } from './composer';
 
 describe('comment composer', () => {
   it('rejects whitespace and preserves line breaks when submitting', async () => {
-    // Empty submissions add noise; losing line breaks changes the meaning of feedback.
     const user = userEvent.setup();
     const submit = vi.fn();
     render(<Composer onSubmit={submit} />);
@@ -20,7 +19,6 @@ describe('comment composer', () => {
     expect(screen.getByRole('textbox')).toHaveValue('');
   });
   it('submits with Ctrl+Enter and cancels an edit with Escape', async () => {
-    // Keyboard users need reliable ways to send feedback and abandon unwanted edits.
     const user = userEvent.setup();
     const submit = vi.fn(),
       cancel = vi.fn();
@@ -32,7 +30,6 @@ describe('comment composer', () => {
     expect(cancel).toHaveBeenCalledOnce();
   });
   it('keeps the accessible label independent of placeholder copy', () => {
-    // Copy changes must not alter the field name announced by screen readers.
     const { rerender } = render(
       <Composer onSubmit={vi.fn()} label="New comment text" placeholder="Share an idea…" />,
     );

@@ -5,7 +5,7 @@ import { handleCanvasKeyDown } from './canvas.utils';
 import { useCanvasGestures } from './use-canvas-gestures';
 import { useCanvasViewport } from './use-canvas-viewport';
 
-/** Hosts the pan-and-zoom board, gesture navigation, and anchored comment content. */
+// Hosts the pan-and-zoom board, gesture navigation, and anchored comment content.
 export function Canvas({ controller, tool, spaceHeld, onPlace, children }: CanvasProps) {
   const { host, world } = useCanvasViewport(controller);
   const gestures = useCanvasGestures({ controller, tool, spaceHeld, onPlace });

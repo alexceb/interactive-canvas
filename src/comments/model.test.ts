@@ -6,7 +6,6 @@ import { createSeedWorkspace } from './seed-workspace';
 
 describe('thread mutations', () => {
   it.each(['', '   ', '\t\n'])('rejects a blank thread ID: %j', (id) => {
-    // New threads must always have usable identifiers for selection and persistence.
     const state = createSeedWorkspace();
     expect(
       workspaceReducer(state, {
@@ -22,7 +21,6 @@ describe('thread mutations', () => {
   });
 
   it('creates a thread without changing its supplied world anchor', () => {
-    // World anchors must survive creation unchanged so pins stay attached during navigation.
     const state = createSeedWorkspace();
     const anchor = { x: -100.25, y: 9000 };
     const next = workspaceReducer(state, {
@@ -34,7 +32,6 @@ describe('thread mutations', () => {
     expect(next.threads.volume).toBe(state.threads.volume);
   });
   it('appends replies to their conversation, preserving the root anchor', () => {
-    // Replies must stay in the same pinned conversation without mutating earlier state.
     const state = createSeedWorkspace();
     const next = workspaceReducer(state, {
       type: 'message/reply',
@@ -46,7 +43,6 @@ describe('thread mutations', () => {
     expect(state.threads.volume.messages).toHaveLength(3);
   });
   it('allows editing an owned root and records the edit timestamp', () => {
-    // Preserving creation time and marking edits keeps discussion history clear.
     const state = createSeedWorkspace();
     const now = new Date().toISOString();
     const next = workspaceReducer(state, {
@@ -65,7 +61,6 @@ describe('thread mutations', () => {
     );
   });
   it('allows editing an owned reply', () => {
-    // Editing one's own feedback must work equally for root comments and replies.
     const next = workspaceReducer(createSeedWorkspace(), {
       type: 'message/edit',
       threadId: 'volume',
@@ -76,7 +71,6 @@ describe('thread mutations', () => {
     expect(next.threads.volume.messages[1].text).toBe('Revised reply');
   });
   it('rejects editing another author’s message', () => {
-    // The reducer must enforce ownership even if a caller bypasses the edit controls.
     const state = createSeedWorkspace();
     expect(
       workspaceReducer(state, {
@@ -91,7 +85,6 @@ describe('thread mutations', () => {
   it.each(['   ', 'x'.repeat(MAX_MESSAGE_LENGTH + 1)])(
     'rejects empty or oversized messages',
     (text) => {
-      // Invalid content must be rejected even when a caller bypasses the composer.
       const state = createSeedWorkspace();
       expect(
         workspaceReducer(state, {
@@ -103,7 +96,6 @@ describe('thread mutations', () => {
     },
   );
   it('resolves and reopens another author’s thread without losing its conversation', () => {
-    // Resolution must preserve the discussion so reviewers can revisit earlier decisions.
     const state = createSeedWorkspace();
     const resolved = workspaceReducer(state, {
       type: 'thread/resolve',
@@ -118,7 +110,6 @@ describe('thread mutations', () => {
     ).toBe(false);
   });
   it('ignores stale thread IDs and duplicate message IDs', () => {
-    // Delayed or repeated actions must not corrupt the conversation.
     const state = createSeedWorkspace();
     expect(
       workspaceReducer(state, { type: 'thread/resolve', threadId: 'missing', resolved: true }),

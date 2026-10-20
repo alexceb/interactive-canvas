@@ -7,7 +7,7 @@ import { Composer } from '../composer/composer';
 import type { MessageViewProps } from './message-view.types';
 import { useMessageEdit } from './use-message-edit';
 
-/** Renders one message and lets its owner edit it without losing keyboard focus. */
+// Renders one message and lets its owner edit it without losing keyboard focus.
 export function MessageView({ message, threadId }: MessageViewProps) {
   const { edit } = useCommentActions();
   const { editing, setEditing, editButton } = useMessageEdit();

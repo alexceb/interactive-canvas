@@ -5,10 +5,15 @@ import { createSeedWorkspace } from './seed-workspace';
 import type { LoadedWorkspace } from './storage.types';
 
 export const STORAGE_KEY = 'formspace.workspace.v1';
+
+// Narrows unknown input to a non-null object, excluding arrays.
 const record = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
+
+// Checks that a stored timestamp is a parseable date string.
 const date = (value: unknown) => typeof value === 'string' && Number.isFinite(Date.parse(value));
 
+// Validates the versioned workspace structure before stored JSON reaches the UI.
 export function isWorkspace(value: unknown): value is Workspace {
   if (!record(value) || value.version !== 1 || !record(value.threads)) return false;
   return Object.entries(value.threads).every(([id, thread]) => {
@@ -26,7 +31,9 @@ export function isWorkspace(value: unknown): value is Workspace {
       !thread.messages.length
     )
       return false;
+
     const ids = new Set<string>();
+    // Reject duplicate IDs and invalid authors, text, or timestamps within the thread.
     return thread.messages.every((message: unknown) => {
       if (
         !record(message) ||
@@ -47,6 +54,7 @@ export function isWorkspace(value: unknown): value is Workspace {
   });
 }
 
+// Loads valid saved data or returns a demo with writes blocked after a read failure.
 export function loadWorkspace(storage: Pick<Storage, 'getItem'>): LoadedWorkspace {
   try {
     const raw = storage.getItem(STORAGE_KEY);
@@ -55,6 +63,7 @@ export function loadWorkspace(storage: Pick<Storage, 'getItem'>): LoadedWorkspac
     if (!isWorkspace(parsed)) throw new Error('Unsupported workspace');
     return { data: parsed, blocked: false, error: null };
   } catch {
+    // Recovery stays in memory so unreadable or unsupported saved data is not overwritten.
     return {
       data: createSeedWorkspace(),
       blocked: true,
@@ -63,6 +72,8 @@ export function loadWorkspace(storage: Pick<Storage, 'getItem'>): LoadedWorkspac
     };
   }
 }
+
+// Saves a workspace and returns an error message if browser storage rejects the write.
 export function saveWorkspace(storage: Pick<Storage, 'setItem'>, data: Workspace): string | null {
   try {
     storage.setItem(STORAGE_KEY, JSON.stringify(data));

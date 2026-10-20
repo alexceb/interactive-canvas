@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 
+// Scrolls to the newest message when its ID changes while preserving position on edits.
 export function useThreadScroll(lastMessageId: string | undefined) {
   const scrollArea = useRef<HTMLElement>(null);
   // biome-ignore lint/correctness/useExhaustiveDependencies: A new last message triggers scrolling; editing existing messages preserves the reading position.

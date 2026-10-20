@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 
-// Each retry needs a fresh lazy component rather than React's cached rejected promise.
+// Creates a fresh lazy renderer so retries do not reuse a cached import rejection.
 export const createModel = () =>
   lazy(() => import('../model/model').then((module) => ({ default: module.Model })));
+
 export const InitialModel = createModel();

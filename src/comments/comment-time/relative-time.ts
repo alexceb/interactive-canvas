@@ -1,3 +1,4 @@
+// Formats recent timestamps as elapsed minutes or hours and older ones as a local date.
 export function relativeTime(iso: string) {
   const minutes = Math.max(0, Math.floor((Date.now() - Date.parse(iso)) / 60000));
   if (minutes < 1) return 'just now';

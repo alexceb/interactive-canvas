@@ -4,7 +4,7 @@ import { TooltipButton } from '../../components/tooltip-button/tooltip-button';
 import { ZOOM_STEP } from '../canvas/canvas.constants';
 import type { ZoomControlsProps } from './zoom-controls.types';
 
-/** Provides zoom in/out, actual-size reset, and fit-to-content actions. */
+// Provides zoom in/out, actual-size reset, and fit-to-content actions.
 export function ZoomControls({ controller }: ZoomControlsProps) {
   const zoom = useSyncExternalStore(controller.subscribe, controller.getZoom);
   return (

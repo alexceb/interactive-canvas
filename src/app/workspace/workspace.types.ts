@@ -1,6 +1,7 @@
 import type { Tool } from '../../canvas/canvas/canvas.types';
 import type { Point } from '../../canvas/coordinates.types';
 import type { ViewportController } from '../../canvas/viewport';
+
 export interface WorkspaceShortcutsOptions {
   startComment: () => void;
   handleEscape: () => void;

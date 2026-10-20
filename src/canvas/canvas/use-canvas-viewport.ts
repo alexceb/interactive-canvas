@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { ViewportController } from '../viewport';
 
+// Attaches the viewport controller to board elements and manages resize and wheel events.
 export function useCanvasViewport(controller: ViewportController) {
   const host = useRef<HTMLDivElement>(null);
   const world = useRef<HTMLDivElement>(null);
@@ -13,6 +14,7 @@ export function useCanvasViewport(controller: ViewportController) {
       controller.resize(element.clientWidth, element.clientHeight),
     );
     observer.observe(element);
+    // Normalizes wheel units into panning or zooming around the pointer.
     const wheel = (event: WheelEvent) => {
       event.preventDefault();
       const rect = element.getBoundingClientRect();
@@ -28,6 +30,7 @@ export function useCanvasViewport(controller: ViewportController) {
           -(event.shiftKey ? event.deltaX : event.deltaY) * unit,
         );
     };
+    // A non-passive listener lets the board handle gestures without also scrolling the page.
     element.addEventListener('wheel', wheel, { passive: false });
     return () => {
       observer.disconnect();

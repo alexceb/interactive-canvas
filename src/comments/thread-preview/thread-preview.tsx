@@ -5,7 +5,7 @@ import { AUTHORS } from '../comments.constants';
 import { getReplyLabel } from '../thread.utils';
 import type { ThreadPreviewProps } from './thread-preview.types';
 
-/** Summarizes a pinned conversation, its participants, reply count, and last activity. */
+// Summarizes a pinned conversation, its participants, reply count, and last activity.
 export function ThreadPreview({ thread, ordinal, onClick }: ThreadPreviewProps) {
   const root = thread.messages[0];
   const last = thread.messages[thread.messages.length - 1];

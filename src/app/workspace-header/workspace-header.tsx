@@ -3,7 +3,7 @@ import { Avatar } from '../../comments/avatar/avatar';
 import { WorkspaceMenu } from '../../components/workspace-menu/workspace-menu';
 import type { WorkspaceHeaderProps } from './workspace-header.types';
 
-/** Displays workspace identity, local-save status, participants, and workspace actions. */
+// Displays workspace identity, local-save status, participants, and workspace actions.
 export function WorkspaceHeader({
   panelOpen,
   openCount,
@@ -22,7 +22,7 @@ export function WorkspaceHeader({
           <span />
           <span />
         </span>
-        <span>formspace</span>
+        <span>Formspace</span>
         <span className="brand-dot">®</span>
       </button>
       <span className="header-divider" />

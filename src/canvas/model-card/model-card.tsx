@@ -2,7 +2,7 @@ import { Box } from 'lucide-react';
 import { ModelPreview } from '../model-preview/model-preview';
 import type { ModelCardProps } from './model-card.types';
 
-/** Frames a model preview with its board position, review caption, and object label. */
+// Frames a model preview with its board position, review caption, and object label.
 export function ModelCard({
   ordinal,
   name,

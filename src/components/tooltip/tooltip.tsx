@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import type { TooltipProps } from './tooltip.types';
 
-/** Adds an accessible tooltip to its child control. */
+// Adds an accessible tooltip to its child control.
 export function Tooltip({ label, children }: TooltipProps) {
   return (
     <TooltipPrimitive.Root>

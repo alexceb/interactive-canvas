@@ -3,11 +3,12 @@ import { memo } from 'react';
 import { ModelCard } from '../model-card/model-card';
 import { MODEL_CARDS, PALETTE_COLORS } from './board-items.constants';
 
-/** Displays the four fixed design artifacts without rerendering them during navigation. */
+// Displays the four fixed design artifacts without rerendering them during navigation.
 export const BoardItems = memo(function BoardItems() {
   return (
     <div className="board-items">
       <ModelCard {...MODEL_CARDS.volume} />
+
       <article
         className="board-item concept-card"
         style={{ left: 420, top: 0, width: 340, height: 280 }}
@@ -33,6 +34,7 @@ export const BoardItems = memo(function BoardItems() {
           Creative direction <span>· 340 × 280</span>
         </div>
       </article>
+
       <article
         className="board-item palette-card"
         style={{ left: 0, top: 350, width: 360, height: 280 }}
@@ -55,6 +57,7 @@ export const BoardItems = memo(function BoardItems() {
           Material palette <span>· 360 × 280</span>
         </div>
       </article>
+
       <ModelCard {...MODEL_CARDS.continuity} />
     </div>
   );

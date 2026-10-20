@@ -5,7 +5,7 @@ import { HelpDialog } from '../help-dialog/help-dialog';
 import { ResetDemoDialog } from '../reset-demo-dialog/reset-demo-dialog';
 import type { WorkspaceMenuProps } from './workspace-menu.types';
 
-/** Opens workspace help and the confirmation flow for resetting demo conversations. */
+// Opens workspace help and the confirmation flow for resetting demo conversations.
 export function WorkspaceMenu({ onReset }: WorkspaceMenuProps) {
   const [resetOpen, setResetOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);

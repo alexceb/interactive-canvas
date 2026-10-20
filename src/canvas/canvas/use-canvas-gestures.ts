@@ -5,6 +5,7 @@ import type { Point } from '../coordinates.types';
 import type { CanvasGestureOptions } from './canvas.types';
 import { getPointerCenter, getPointerDistance, isControl, localPoint } from './canvas.utils';
 
+// Tracks pointer gestures for panning, pinch zoom, and stationary comment placement.
 export function useCanvasGestures({ controller, tool, spaceHeld, onPlace }: CanvasGestureOptions) {
   const gesture = useRef({
     pointers: new Map<number, Point>(),
@@ -12,6 +13,7 @@ export function useCanvasGestures({ controller, tool, spaceHeld, onPlace }: Canv
     moved: false,
     pinched: false,
   });
+  // Captures eligible pointer input and starts or extends the active gesture.
   const pointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (isControl(event.target) || (event.button !== 0 && event.button !== 1)) return;
     event.currentTarget.focus({ preventScroll: true });
@@ -27,6 +29,7 @@ export function useCanvasGestures({ controller, tool, spaceHeld, onPlace }: Canv
     if (state.pointers.size > 1) state.pinched = true;
     event.currentTarget.dataset.dragging = 'true';
   };
+  // Pans with one pointer or combines center movement and zoom for a two-pointer pinch.
   const pointerMove = (event: ReactPointerEvent) => {
     const state = gesture.current;
     const previous = state.pointers.get(event.pointerId);
@@ -40,6 +43,7 @@ export function useCanvasGestures({ controller, tool, spaceHeld, onPlace }: Canv
       const previousCenter = getPointerCenter(before);
       const nextCenter = getPointerCenter(after);
       const previousDistance = getPointerDistance(before);
+      // Move the pinch center first, then zoom around its new position.
       controller.pan(nextCenter.x - previousCenter.x, nextCenter.y - previousCenter.y);
       if (previousDistance > 1) {
         controller.zoom(
@@ -48,10 +52,10 @@ export function useCanvasGestures({ controller, tool, spaceHeld, onPlace }: Canv
         );
       }
     } else if (before.length === 1) {
-      // Dragging always navigates; a stationary click places a comment in comment mode.
       controller.pan(point.x - previous.x, point.y - previous.y);
     }
   };
+  // Ends pointer tracking and places comments only after an unmoved, unpinched primary click.
   const pointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
     const state = gesture.current;
     if (!state.pointers.has(event.pointerId)) return;
@@ -62,10 +66,10 @@ export function useCanvasGestures({ controller, tool, spaceHeld, onPlace }: Canv
         onPlace(screenToWorld(localPoint(event), controller.view));
     }
   };
+  // Cancels pointer tracking and prevents remaining touches from becoming comment clicks.
   const cancelPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
     const state = gesture.current;
     if (!state.pointers.delete(event.pointerId)) return;
-    // An interrupted gesture can never place a comment, even if another pointer remains.
     state.pinched = true;
     if (!state.pointers.size) event.currentTarget.dataset.dragging = 'false';
   };

@@ -1,6 +1,8 @@
-import type { AuthorId, Message, Thread, Workspace } from "./comments.types";
+import type { AuthorId, Message, Thread, Workspace } from './comments.types';
 
+// Creates the demo conversations with timestamps relative to the supplied time.
 export function createSeedWorkspace(now = Date.now()): Workspace {
+  // Builds a demo message dated the given number of minutes before the seed time.
   const message = (id: string, authorId: AuthorId, text: string, minutes: number): Message => ({
     id,
     authorId,
@@ -9,49 +11,69 @@ export function createSeedWorkspace(now = Date.now()): Workspace {
   });
   const threads: Thread[] = [
     {
-      id: "volume",
+      id: 'volume',
       anchor: { x: 315, y: 105 },
       resolved: false,
       messages: [
         message(
-          "v1",
-          "maya",
-          "Love this softer direction. Could we try a slightly warmer lavender for the volume study?",
+          'v1',
+          'maya',
+          'Love this softer direction. Could we try a slightly warmer lavender for the volume study?',
           28,
         ),
-        message("v2", "alex", "Agreed. I added a warmer option to the material palette below.", 21),
-        message("v3", "sam", "The matte finish feels right. Let’s keep that as we explore the color.", 16),
+        message('v2', 'alex', 'Agreed. I added a warmer option to the material palette below.', 21),
+        message(
+          'v3',
+          'sam',
+          'The matte finish feels right. Let’s keep that as we explore the color.',
+          16,
+        ),
       ],
     },
     {
-      id: "direction",
+      id: 'direction',
       anchor: { x: 690, y: 152 },
       resolved: false,
       messages: [
         message(
-          "d1",
-          "alex",
-          "The headline is working well. Should we give the supporting copy a little more breathing room?",
+          'd1',
+          'alex',
+          'The headline is working well. Should we give the supporting copy a little more breathing room?',
           18,
         ),
-        message("d2", "maya", "Yes! A little extra space would help the whole composition feel calmer.", 12),
+        message(
+          'd2',
+          'maya',
+          'Yes! A little extra space would help the whole composition feel calmer.',
+          12,
+        ),
       ],
     },
     {
-      id: "continuity",
+      id: 'continuity',
       anchor: { x: 686, y: 477 },
       resolved: false,
       messages: [
-        message("c1", "sam", "This shape has a nice sense of balance. Curious how it feels alongside the cube.", 8),
+        message(
+          'c1',
+          'sam',
+          'This shape has a nice sense of balance. Curious how it feels alongside the cube.',
+          8,
+        ),
       ],
     },
     {
-      id: "palette",
+      id: 'palette',
       anchor: { x: 145, y: 488 },
       resolved: true,
       messages: [
-        message("p1", "maya", "Can we bring the sage into this palette? It would tie the two studies together.", 65),
-        message("p2", "alex", "Done — the second swatch now matches the continuity study.", 44),
+        message(
+          'p1',
+          'maya',
+          'Can we bring the sage into this palette? It would tie the two studies together.',
+          65,
+        ),
+        message('p2', 'alex', 'Done — the second swatch now matches the continuity study.', 44),
       ],
     },
   ];
