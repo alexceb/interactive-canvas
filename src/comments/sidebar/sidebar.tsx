@@ -71,7 +71,7 @@ export function Sidebar({
               </button>
             )}
             <Dialog.Title>
-              {draft ? 'New comment' : thread ? `Thread ${ordinal}` : 'Comments'}
+              {draft ? 'New comment' : thread ? `Thread ${ordinal}` : 'Threads'}
             </Dialog.Title>
             {!thread && !draft && <span className={styles.countBadge}>{list.length}</span>}
           </div>

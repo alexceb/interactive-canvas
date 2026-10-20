@@ -1,22 +1,3 @@
-.sidebarIntro {
-  padding: 26px 22px 19px;
-}
-
-.sidebarIntro h2 {
-  margin: 0 0 8px;
-  font-family: Georgia, serif;
-  font-weight: 400;
-  font-size: 22px;
-  letter-spacing: -0.6px;
-  color: #555e48;
-}
-
-.sidebarIntro p {
-  margin: 0;
-  font-size: 11px;
-  color: #818a75;
-}
-
 .threadList {
   padding: 0 10px;
 }
@@ -69,14 +50,5 @@
   .sidebarFooter .secondaryButton {
     min-height: 42px;
     font-size: 12px;
-  }
-}
-
-@media (max-width: 600px) {
-  .sidebarIntro {
-    padding-top: 22px;
-  }
-  .sidebarIntro h2 {
-    font-size: 25px;
   }
 }

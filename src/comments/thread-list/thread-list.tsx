@@ -13,10 +13,6 @@ export function ThreadList({ threads, filter, onFilterChange, onSelect, onAdd }:
   );
   return (
     <>
-      <div className={styles.sidebarIntro}>
-        <h2>A space for feedback.</h2>
-        <p>Good work starts with a conversation.</p>
-      </div>
       <ThreadFilters threads={threads} value={filter} onChange={onFilterChange} />
       <section
         className={`${shared.scrollArea} ${styles.threadList}`}
