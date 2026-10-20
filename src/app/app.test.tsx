@@ -33,8 +33,10 @@ describe('canvas keyboard navigation', () => {
   ])('preserves modified or composing keyboard input: %j', async (keys) => {
     // Canvas shortcuts must preserve browser accessibility controls and text composition.
     render(<App />);
+    
     const canvas = screen.getByTestId('canvas');
     canvas.focus();
+    
     const world = canvas.querySelector('.canvas-world');
     const transform = world?.getAttribute('style');
     const event = new KeyboardEvent('keydown', { ...keys, bubbles: true, cancelable: true });
@@ -42,7 +44,9 @@ describe('canvas keyboard navigation', () => {
     fireEvent(canvas, event);
 
     expect(event.defaultPrevented).toBe(false);
+    
     await act(() => new Promise<void>((resolve) => requestAnimationFrame(() => resolve())));
+    
     expect(world).toHaveAttribute('style', transform);
     expect(canvas).toHaveAttribute('data-zoom', '1');
   });
@@ -50,8 +54,10 @@ describe('canvas keyboard navigation', () => {
   it('still zooms with Shift+plus', async () => {
     // Typing + requires Shift on many keyboards, so modifier filtering must allow it.
     render(<App />);
+    
     const canvas = screen.getByTestId('canvas');
     canvas.focus();
+    
     const event = new KeyboardEvent('keydown', {
       key: '+',
       shiftKey: true,
@@ -59,7 +65,9 @@ describe('canvas keyboard navigation', () => {
       cancelable: true,
     });
     fireEvent(canvas, event);
+    
     expect(event.defaultPrevented).toBe(true);
+    
     await waitFor(() => expect(canvas).toHaveAttribute('data-zoom', '1.2'));
   });
 });
@@ -73,7 +81,9 @@ describe('sidebar focus and keyboard interactions', () => {
     // Hiding the panel must not discard unsent feedback or detach it from its pin.
     mobile = narrow;
     const user = userEvent.setup();
+    
     render(<App />);
+    
     await user.keyboard('c{Enter}');
     await user.type(
       screen.getByRole('textbox', { name: 'New comment text' }),
@@ -84,24 +94,30 @@ describe('sidebar focus and keyboard interactions', () => {
     );
 
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+    
     expect(screen.getByRole('img', { name: 'Draft comment location' })).toBeInTheDocument();
+    
     await waitFor(() =>
       expect(screen.getByRole('button', { name: 'Show comments' })).toHaveFocus(),
     );
     await user.click(screen.getByRole('button', { name: 'Show comments' }));
+    
     expect(screen.getByRole('textbox', { name: 'New comment text' })).toHaveValue(
       'Unsent feedback\nWith context',
     );
 
     await user.click(screen.getByRole('button', { name: 'Send comment' }));
+    
     expect(
       screen.getByText('Unsent feedback\nWith context', { collapseWhitespace: false }),
     ).toBeInTheDocument();
     expect(screen.queryByRole('img', { name: 'Draft comment location' })).not.toBeInTheDocument();
+    
     await user.click(screen.getByRole('button', { name: 'Back to comments' }));
     await user.click(screen.getByRole('button', { name: /Add a comment/ }));
     await waitFor(() => expect(screen.getByTestId('canvas')).toHaveFocus());
     await user.keyboard('{Enter}');
+    
     expect(screen.getByRole('textbox', { name: 'New comment text' })).toHaveValue('');
   });
 
@@ -109,17 +125,21 @@ describe('sidebar focus and keyboard interactions', () => {
     // Explicit cancellation must clear both text and location before the next draft.
     const user = userEvent.setup();
     render(<App />);
+    
     await user.keyboard('c{Enter}');
     await user.type(
       screen.getByRole('textbox', { name: 'New comment text' }),
       'Discard this draft',
     );
+    
     if (via === 'Escape') await user.keyboard('{Escape}');
     else await user.click(screen.getByRole('button', { name: 'Cancel' }));
 
     expect(screen.queryByRole('img', { name: 'Draft comment location' })).not.toBeInTheDocument();
+    
     await user.click(screen.getByRole('button', { name: /Add a comment/ }));
     await user.keyboard('{Enter}');
+    
     expect(screen.getByRole('textbox', { name: 'New comment text' })).toHaveValue('');
   });
 
@@ -129,9 +149,12 @@ describe('sidebar focus and keyboard interactions', () => {
       // Returning focus keeps keyboard users oriented after the modal disappears.
       mobile = true;
       const user = userEvent.setup();
+      
       render(<App />);
+      
       const toggle = screen.getByRole('button', { name: 'Show comments' });
       await user.click(toggle);
+      
       expect(screen.getByRole('dialog')).toBeInTheDocument();
 
       if (via === 'Escape') await user.keyboard('{Escape}');
@@ -147,12 +170,14 @@ describe('sidebar focus and keyboard interactions', () => {
     mobile = true;
     const user = userEvent.setup();
     render(<App />);
+    
     await user.click(screen.getByRole('button', { name: 'Show comments' }));
     await user.click(screen.getByRole('button', { name: /Add a comment/ }));
 
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
     await waitFor(() => expect(screen.getByTestId('canvas')).toHaveFocus());
     await user.keyboard('{Enter}');
+    
     expect(screen.getByRole('textbox', { name: 'New comment text' })).toHaveFocus();
 
     // Later dismissals must not reuse a stale focus destination.
@@ -168,13 +193,18 @@ describe('sidebar focus and keyboard interactions', () => {
       // Tabbing within the editor must not disable cancellation or dismiss the whole thread.
       const user = userEvent.setup();
       render(<App />);
+      
       await user.click(screen.getByTestId('thread-direction'));
       await user.click(screen.getByRole('button', { name: 'Edit comment' }));
+      
       const editor = screen.getByRole('textbox', { name: 'Edit comment text' });
+      
       await user.clear(editor);
       await user.type(editor, 'Discard this edit');
+      
       if (target !== 'textarea') await user.tab();
       if (target === 'Save edit') await user.tab();
+      
       expect(
         target === 'textarea' ? editor : screen.getByRole('button', { name: target }),
       ).toHaveFocus();
@@ -193,10 +223,13 @@ describe('sidebar focus and keyboard interactions', () => {
     // Replacing the editor must leave keyboard users at the message they were editing.
     const user = userEvent.setup();
     render(<App />);
+    
     await user.click(screen.getByTestId('thread-direction'));
     await user.click(screen.getByRole('button', { name: 'Edit comment' }));
+    
     const editor = screen.getByRole('textbox', { name: 'Edit comment text' });
     const original = (editor as HTMLTextAreaElement).value;
+    
     await user.clear(editor);
     await user.type(editor, 'Revised feedback');
     await user.click(screen.getByRole('button', { name: action }));
