@@ -2,6 +2,10 @@
 
 A client-side design review workspace with a pan-and-zoom board, two Three.js models, and conversations anchored to board coordinates. Built for the Encube frontend assignment with React, TypeScript, and Radix primitives. Styling uses CSS Modules and Tailwind CSS setup. Submitted comments are stored in this browser; there is no backend.
 
+## Presentation
+
+[Watch the presentation recording](https://youtu.be/s8BolHlZGL0).
+
 ## Run locally
 
 Use the Node version pinned in [`.nvmrc`](.nvmrc) and Yarn Classic 1.22.22, pinned in [`package.json`](package.json). From the repository root, with nvm installed:
