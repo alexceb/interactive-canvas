@@ -7,10 +7,12 @@ import { createModelScene } from './model-scene';
 // Renders one static Three.js shape and releases its WebGL resources on unmount.
 export function Model({ shape }: ModelProps) {
   const host = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     const element = host.current;
     if (element) return createModelScene(element, shape);
   }, [shape]);
+
   return (
     <div className={styles.modelRender} ref={host} role="img" aria-label={`Static 3D ${shape}`}>
       <ModelFallback

@@ -12,13 +12,13 @@ Board-item movement, model rotation, deletion, undo/redo, rich text, and live co
 
 ## State ownership and execution flows
 
-| State | Owner | Lifetime |
-| --- | --- | --- |
-| Pan, zoom, canvas dimensions | [`ViewportController`](src/canvas/viewport.ts) | Workspace session |
-| Conversation document and save status | [`CommentsProvider`](src/comments/comments-provider/comments-provider.tsx) | Document saved to localStorage; status held in memory |
-| Active tool, selected thread, panel visibility, new-thread draft | [`useWorkspace`](src/app/workspace/use-workspace.ts) | Workspace session |
-| Thread filter | [`Sidebar`](src/comments/sidebar/sidebar.tsx) | Component lifetime |
-| Uncontrolled reply/edit input | [`useComposer`](src/comments/composer/use-composer.ts) | Composer lifetime |
+| State                                                            | Owner                                                                      | Lifetime                                              |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Pan, zoom, canvas dimensions                                     | [`ViewportController`](src/canvas/viewport.ts)                             | Workspace session                                     |
+| Conversation document and save status                            | [`CommentsProvider`](src/comments/comments-provider/comments-provider.tsx) | Document saved to localStorage; status held in memory |
+| Active tool, selected thread, panel visibility, new-thread draft | [`useWorkspace`](src/app/workspace/use-workspace.ts)                       | Workspace session                                     |
+| Thread filter                                                    | [`Sidebar`](src/comments/sidebar/sidebar.tsx)                              | Component lifetime                                    |
+| Uncontrolled reply/edit input                                    | [`useComposer`](src/comments/composer/use-composer.ts)                     | Composer lifetime                                     |
 
 Two paths explain the main boundary:
 
@@ -46,6 +46,8 @@ The board uses a DOM layer transformed by `translate(x, y) scale(zoom)`. This su
 worldX = (screenX - panX) / zoom
 worldY = (screenY - panY) / zoom
 ```
+
+![canvas coordinates system](assets/coordinates.png)
 
 Stored anchors always use world coordinates. Pointer-centered zoom adjusts translation to preserve the world point under the pointer; pinch gestures use the same operation at their center. Pin visuals use inverse scale to stay readable while their tips remain anchored.
 

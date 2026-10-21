@@ -88,12 +88,16 @@ yarn test:e2e
 
 Playwright uses `/usr/bin/chromium` when present, otherwise its managed Chromium. Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to use another installed Chromium executable. Linux hosts may also need OS dependencies (`yarn playwright install --with-deps chromium`).
 
-The suite starts Vite on port 5173, or reuses an existing server there when `CI` is unset. It covers WebGL rendering, touch navigation, conversation workflows, anchor alignment, keyboard placement, and storage recovery. The performance scenario measures React commits, intercepted WebGL `drawElements` calls, and long-task observations during a pan; it does not establish an FPS guarantee or a document-size limit.
-
-See [VALIDATION.md](VALIDATION.md) for evidence, historical results, and coverage limits, and [WALKTHROUGH.md](WALKTHROUGH.md) for a demo recording outline.
+It covers WebGL rendering, touch navigation, conversation workflows, anchor alignment, keyboard placement, and storage recovery. The performance scenario measures React commits, intercepted WebGL `drawElements` calls, and long-task observations during a pan; it does not establish an FPS guarantee or a document-size limit.
 
 ## Local data and limits
 
 Submitted conversations live under `formspace.workspace.v1` in localStorage. Invalid or unsupported saved data is preserved while a temporary demo runs in memory. **Reset demo…** replaces that data and enables saving again. A storage warning means changes may be lost on reload.
 
 This is a single-browser simulation. It has no server authentication, multi-user synchronization, cross-tab merging, attachments, or rich text. Ownership checks describe local application behavior; they are not a security boundary. The viewport and unfinished drafts are session state and are not persisted.
+
+## Deployment to Netlify
+
+The public demo is available at [formspace-canvas.netlify.app](https://formspace-canvas.netlify.app/).
+
+Comments remain in each visitor's browser. Data from localhost or another deployment origin does not transfer to the public demo automatically.

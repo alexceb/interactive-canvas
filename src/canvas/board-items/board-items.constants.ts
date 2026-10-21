@@ -1,4 +1,5 @@
 import type { ModelCardProps } from "../model-card/model-card.types";
+
 export const MODEL_CARDS = {
   volume: {
     ordinal: "01",
